@@ -34,7 +34,7 @@ export default function InlineStyleToObject(inlineStyle = '') {
         //      -webkit-style-property = WebkitStyleProperty
         property = property
           .replace(/^-ms-/, 'ms-')
-          .replace(/-(.)/g, (_, character) => character.toUpperCase());
+          .replace(/-(.)/g, (_, character) => character);
 
         // add the new style property and value to the style object
         styleObject[property] = value;
