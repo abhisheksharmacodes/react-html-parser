@@ -4,6 +4,8 @@
  * @param {String} inlineStyle='' The inline style to convert
  * @returns {Object} The converted style
  */
+
+
 export default function InlineStyleToObject(inlineStyle = '') {
 
   // just return empty object if the inlineStyle is empty
@@ -32,9 +34,11 @@ export default function InlineStyleToObject(inlineStyle = '') {
         // additionally don't uppercase any -ms- prefix
         // e.g. -ms-style-property = msStyleProperty
         //      -webkit-style-property = WebkitStyleProperty
-        property = property
-          .replace(/^-ms-/, 'ms-')
-          .replace(/-(.)/g, (_, character) => character.toUpperCase());
+        if (property.slice(0, 2) !== '--') {      // It doesn't change the custom CSS properties
+          property = property
+            .replace(/^-ms-/, 'ms-')
+            .replace(/-(.)/g, (_, character) => character.toUpperCase());
+        }
 
         // add the new style property and value to the style object
         styleObject[property] = value;
